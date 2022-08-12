@@ -6,23 +6,19 @@
 #define HUFFMANEXERCISE_NODE_H
 
 
-class Node {
-private:
+struct Node {
     //character itself
     char c;
     //frequency
     int freq;
-public:
+
     Node(char character);
-    ~Node() {}
 
-    char get_c();
-    int get_freq();
-
-    void set_freq(int i);
     void inc_freq();
 
-    friend bool operator> (const Node& lhs, const Node& rhs);
+    bool operator==(const Node &) const;
+    bool operator>(const Node &) const;
+    bool operator<(const Node &) const;
 
 };
 

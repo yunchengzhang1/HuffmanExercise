@@ -6,24 +6,15 @@
 
 Node::Node(char character){
     c = character;
-}
-
-char Node::get_c(){
-    return c;
-}
-int Node::get_freq(){
-    return freq;
-}
-
-void Node::set_freq(int i){
-    freq += i;
+    freq = 1;
 }
 
 void Node::inc_freq(){
     freq ++;
 }
 
-//comparison operators
-bool operator>(const Node &lhs, const Node &rhs) {
-    return lhs.freq > rhs.freq;
-}
+bool Node::operator==(const Node  &f) const {return c == f.c;} //Node.c == Node.c
+bool Node::operator>(const Node  &f) const {return freq > f.freq;} //Node.freq > Node.freq
+bool Node::operator<(const Node  &f) const {return freq < f.freq;} //Node.freq < Node.freq
+
+
