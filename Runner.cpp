@@ -7,6 +7,8 @@ void Runner::run(string const& filename){
     readBinaryFile(filename);
     print_vec(&nodes);
     tree_building();
+    traverse_tree(nodes_tree[0], init_bits);
+    std::cout << "tree traverse done" << std::endl;
 }
 
 void Runner::readBinaryFile(string const& filename){
@@ -59,6 +61,24 @@ Node * Runner::get_leaf() {
     return &leaves.back(); //insert and getting the new element in leaves
 }
 
+void Runner::traverse_tree(Node n,string bitset){
+    //traverse through nodes_tree
+
+    if (n.left != NULL){
+        bitset.append("0");
+        traverse_tree(* n.left, bitset);
+        bitset.pop_back();
+    }
+    if (n.right != NULL){
+        bitset.append("1");
+        traverse_tree(* n.right, bitset);
+        bitset.pop_back();
+    }
+    if (n.c.length() ==1){
+        std::cout<<n.c <<" " <<bitset <<std::endl;
+    }
+    return;
+}
 
 
 void Runner::insert_to_vec(string const& c){
