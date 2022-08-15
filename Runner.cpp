@@ -11,6 +11,8 @@ void Runner::run(string const& filename){
     std::cout << "tree traverse done" << std::endl;
     store_bits();
     store_tree();
+    reconstruct_tree();
+    decompress();
 }
 
 void Runner::readBinaryFile(string const& filename){
@@ -64,6 +66,13 @@ Node * Runner::get_leaf() {
     return &leaves.back(); //insert and getting the new element in leaves
 }
 
+Node * Runner::get_rec_leaf() {
+    Node n = leaf_stack.top();
+    leaf_stack.pop();
+    reconstruct_leaves.push_back(n);
+    return &reconstruct_leaves.back(); //insert and getting the new element in leaves
+}
+
 void Runner::traverse_tree(Node n,string bitset){
     //traverse through nodes_tree
 
@@ -100,24 +109,79 @@ void Runner::store_tree(){
     std::ofstream ofile;
     string filename = "tree.txt";
     ofile.open(filename);
-    for (int i=0; i<bytes.size(); i++){
-        string bitlist = full_nodes[i].c;
-        ofile<<bitlist<<std::endl;
+    if (ofile.is_open()){
+        for (int i=0; i<full_nodes.size(); i++){
+            string bitlist = full_nodes[i].c;
+            ofile<<bitlist<<std::endl;
+        }
+        std::cout<<"tree file stored"<<std::endl;
     }
-    std::cout<<"tree file stored"<<std::endl;
+}
+
+void Runner::reconstruct_tree() {
+    std::cout << "Trying to reconstruct tree" << std::endl;
+    ifstream inFile;
+    size_t size = 0; // here
+
+    inFile.open( "tree.txt");
+    string character;
+    while (inFile >> character){
+//        std::cout<<character<<std::endl;
+        if (character.size() == 1){ //if is a leaf: one character EX: a
+            leaf_stack.push(Node(character));
+        }
+        else{//if is a node: more than one char, ex: abc
+            Node tempNode(character);
+            std::cout<<"right "<<leaf_stack.top().c<<std::endl;
+            tempNode.right = get_rec_leaf(); //set tempNode's right to a reference
+            std::cout<<"left  "<<leaf_stack.top().c<<std::endl;
+            tempNode.left = get_rec_leaf(); //set tempNode's left to a reference
+            leaf_stack.push(tempNode); //push the new node to stack as leaf until reach the root
+        }
+    }
+    reconstructed = leaf_stack.top();
+    std::cout<<"reconstruction done"<<std::endl;
 }
 
 void Runner::insert_to_vec(string const& c){
     // if find the current c in nodes, freq++
     auto itr = std::find(nodes.begin(), nodes.end(), c);
     if( itr != nodes.end()){
-//        std::cout<<"found"<<std::endl;
         itr->inc_freq();
     }
     else{//else insert a new node to vector
         Node tempNode(c);
         nodes.push_back(tempNode);
     }
+}
+
+void Runner::decompress(){
+    std::cout << "Trying to decompress file" << std::endl;
+    ifstream inFile;
+    size_t size = 0; // here
+    string decomp;
+
+    inFile.open( "bits.txt");
+    string code;
+    while (inFile >> code){
+        string character =convert(code);
+        decomp.append(character);
+    }
+    std::cout << "Decompress finished: " << std::endl;
+    std::cout<<decomp<<std::endl;
+}
+
+string Runner::convert(string s){
+    Node* it = &reconstructed;
+    for (int i =0; i<s.length(); i++){
+        if(s[i] == '0'){
+            it = it->left;
+        }
+        else if (s[i]=='1'){
+            it = it->right;
+        }
+    }
+    return it->c;
 }
 
 void Runner::print_vec( vector<Node>* n){

@@ -18,9 +18,10 @@ struct Node {
     Node* right;
 
     Node();
-    Node(Node *, Node *);
+    Node(Node *, Node *); //combining two leaves to form a new node
     Node(string character);
     Node(string character, int f);
+//    Node& operator =(const Node& n);
 
     void set_children(Node &, Node &);
     void inc_freq();

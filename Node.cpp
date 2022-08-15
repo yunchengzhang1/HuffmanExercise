@@ -33,6 +33,14 @@ Node::Node(Node* lhs, Node* rhs){
     right = rhs;
 }
 
+//Node& Node::operator =(const Node& n){
+//    c = n.c;
+//    freq = n.freq;
+//    Node *l = new Node(n.left->c);
+//    left = l;
+//    Node *r = new Node(n.right->c);
+//    right = r;
+//}
 
 void Node::inc_freq(){
     freq ++;
