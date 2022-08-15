@@ -9,6 +9,8 @@ void Runner::run(string const& filename){
     tree_building();
     traverse_tree(nodes_tree[0], init_bits);
     std::cout << "tree traverse done" << std::endl;
+    store_bits();
+    store_tree();
 }
 
 void Runner::readBinaryFile(string const& filename){
@@ -35,6 +37,7 @@ void Runner::readBinaryFile(string const& filename){
         std::cout << "oData["<<i<<"] ";
         std::cout <<"["<< oData[i]<<"]"<<std::endl;
         string s(1, oData[i]);
+        bytes.push_back(s);
         insert_to_vec(s);
     }
     sort(nodes.begin(), nodes.end()); //after shuffling in all characters, sort the vector in descending order for POP_BACK
@@ -76,10 +79,33 @@ void Runner::traverse_tree(Node n,string bitset){
     }
     if (n.c.length() ==1){
         std::cout<<n.c <<" " <<bitset <<std::endl;
+        bits.insert({n.c, bitset});
     }
+    full_nodes.push_back(n);
     return;
 }
 
+void Runner::store_bits(){
+    std::ofstream ofile;
+    string filename = "bits.txt";
+    ofile.open(filename);
+    for (int i=0; i<bytes.size(); i++){
+        string bitlist = bits.find(bytes[i])->second;
+        ofile<<bitlist<<std::endl;
+    }
+    std::cout<<"bits file stored"<<std::endl;
+}
+
+void Runner::store_tree(){
+    std::ofstream ofile;
+    string filename = "tree.txt";
+    ofile.open(filename);
+    for (int i=0; i<bytes.size(); i++){
+        string bitlist = full_nodes[i].c;
+        ofile<<bitlist<<std::endl;
+    }
+    std::cout<<"tree file stored"<<std::endl;
+}
 
 void Runner::insert_to_vec(string const& c){
     // if find the current c in nodes, freq++

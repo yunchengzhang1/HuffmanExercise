@@ -13,6 +13,7 @@
 #include <cstring> // for std::strlen
 #include "Node.h"
 #include <bits/stdc++.h>
+#include <map>
 
 #define M 16 //use for bitset
 
@@ -21,6 +22,7 @@ using std::vector;
 using std::ifstream;
 using std::ios;
 using std::list;
+using std::map;
 
 class Runner {
 private:
@@ -29,6 +31,9 @@ private:
     list<Node> leaves;
 //    std::bitset<M> init_bits; // paused, finding a way to append bits to bitse
     string init_bits;
+    map<string, string> bits; //to keep track of all the bits
+    vector<string> bytes; //to keep track of all the bytes in file
+    vector<Node> full_nodes; //vector of nodes ordered by depth-first post order traversing the Node tree
 public:
 
     void run(string const& filename);
@@ -39,6 +44,8 @@ public:
     void print_vec( vector<Node>* ); //for testing
 //    void traverse_tree(Node, std::bitset<M>); //paused, finding a way to append bits to bitset
     void traverse_tree(Node, string);
+    void store_bits(); //convert bytes to bits and export
+    void store_tree(); //store the Node tree in the file for later decompress
 };
 
 
