@@ -112,7 +112,8 @@ void Runner::store_tree(){
     if (ofile.is_open()){
         for (int i=0; i<full_nodes.size(); i++){
             string bitlist = full_nodes[i].c;
-            ofile<<bitlist<<std::endl;
+            bitlist.push_back('\0');
+            ofile<<bitlist;
         }
         std::cout<<"tree file stored"<<std::endl;
     }
@@ -124,14 +125,14 @@ void Runner::reconstruct_tree() {
     size_t size = 0; // here
 
     inFile.open( "tree.txt");
-    string character;
-    while (inFile >> character){
-//        std::cout<<character<<std::endl;
-        if (character.size() == 1){ //if is a leaf: one character EX: a
-            leaf_stack.push(Node(character));
+    string line;
+    while (std::getline(inFile, line, '\0')){
+        std::cout<<line<<std::endl;
+        if (line.size() == 1){ //if is a leaf: one character EX: a
+            leaf_stack.push(Node(line));
         }
         else{//if is a node: more than one char, ex: abc
-            Node tempNode(character);
+            Node tempNode(line);
             std::cout<<"right "<<leaf_stack.top().c<<std::endl;
             tempNode.right = get_rec_leaf(); //set tempNode's right to a reference
             std::cout<<"left  "<<leaf_stack.top().c<<std::endl;
@@ -165,6 +166,7 @@ void Runner::decompress(){
     string code;
     while (inFile >> code){
         string character =convert(code);
+        std::cout << character << std::endl;
         decomp.append(character);
     }
     std::cout << "Decompress finished: " << std::endl;
