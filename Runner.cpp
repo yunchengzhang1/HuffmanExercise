@@ -5,7 +5,7 @@
 #include "Runner.h"
 void Runner::run(string const& filename){
     readBinaryFile(filename);
-    print_vec(&nodes);
+//    print_vec(&nodes);
     tree_building();
     traverse_tree(nodes_tree[0], init_bits);
     std::cout << "tree traverse done" << std::endl;
@@ -25,19 +25,19 @@ void Runner::readBinaryFile(string const& filename){
 
     inFile.seekg(0, ios::end); // set the pointer to the end
     size = inFile.tellg() ; // get the length of the file
-    std::cout << "Size of file: " << size;
+//    std::cout << "Size of file: " << size;
     inFile.seekg(0, ios::beg); // set the pointer to the beginning
 
     oData = new char[ size+1 ]; //  for the '\0'
     inFile.read( oData, size );
     oData[size] = '\0' ; // set '\0'
-    std::cout << " oData size: " << strlen(oData) << "\n";
+//    std::cout << " oData size: " << strlen(oData) << "\n";
 
     //print data
     for ( size_t i = 0; i < strlen(oData); i++ )
     {
-        std::cout << "oData["<<i<<"] ";
-        std::cout <<"["<< oData[i]<<"]"<<std::endl;
+//        std::cout << "oData["<<i<<"] ";
+//        std::cout <<"["<< oData[i]<<"]"<<std::endl;
         string s(1, oData[i]);
         bytes.push_back(s);
         insert_to_vec(s);
@@ -52,7 +52,6 @@ Node * Runner::tree_building() {
         Node *lhs = get_leaf();
         Node *rhs = get_leaf();
         Node parent(lhs, rhs);
-        std::cout<<parent.freq<<std::endl;
         nodes_tree.push_back(parent); //push back the new parent node
         sort(nodes.begin(), nodes.end()); //again sort the vector in descending order
     }//the last remaining node becomes the root of this tree
@@ -75,7 +74,6 @@ Node * Runner::get_rec_leaf() {
 
 void Runner::traverse_tree(Node n,string bitset){
     //traverse through nodes_tree
-
     if (n.left != NULL){
         bitset.append("0");
         traverse_tree(* n.left, bitset);
@@ -87,7 +85,6 @@ void Runner::traverse_tree(Node n,string bitset){
         bitset.pop_back();
     }
     if (n.c.length() ==1){
-        std::cout<<n.c <<" " <<bitset <<std::endl;
         bits.insert({n.c, bitset});
     }
     full_nodes.push_back(n);
@@ -127,15 +124,12 @@ void Runner::reconstruct_tree() {
     inFile.open( "tree.txt");
     string line;
     while (std::getline(inFile, line, '\0')){
-        std::cout<<line<<std::endl;
         if (line.size() == 1){ //if is a leaf: one character EX: a
             leaf_stack.push(Node(line));
         }
         else{//if is a node: more than one char, ex: abc
             Node tempNode(line);
-            std::cout<<"right "<<leaf_stack.top().c<<std::endl;
             tempNode.right = get_rec_leaf(); //set tempNode's right to a reference
-            std::cout<<"left  "<<leaf_stack.top().c<<std::endl;
             tempNode.left = get_rec_leaf(); //set tempNode's left to a reference
             leaf_stack.push(tempNode); //push the new node to stack as leaf until reach the root
         }
@@ -166,11 +160,12 @@ void Runner::decompress(){
     string code;
     while (inFile >> code){
         string character =convert(code);
-        std::cout << character << std::endl;
         decomp.append(character);
     }
     std::cout << "Decompress finished: " << std::endl;
+    std::cout << "============================================== " << std::endl;
     std::cout<<decomp<<std::endl;
+    std::cout << "============================================== " << std::endl;
 }
 
 string Runner::convert(string s){
