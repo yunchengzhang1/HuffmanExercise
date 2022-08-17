@@ -39,7 +39,7 @@ private:
     Node reconstructed; //root node of the reconstructed tree
     std::stack<Node> leaf_stack; //if read a leaf, put it on stack, and take 2 out when see a node
 public:
-    void run(string const& filename);
+    void run(string const& inputFile, string const& treeFile, string const& bitsFile);
     void readBinaryFile(string const& filename); //infile the binary file to get original text
     void insert_to_vec(string const& rhs); //insert new node to nodes vector
     Node * tree_building(); // buildup the Node tree
@@ -47,10 +47,10 @@ public:
     Node * get_rec_leaf(); //pop a leaf from leaf_stack, put this leaf into reconstruct_leaves, and return its address
     void print_vec( vector<Node>* ); //for testing
     void traverse_tree(Node, string);
-    void store_bits(); //convert bytes to bits and export
-    void store_tree(); //store the Node tree in the file for later decompress
-    void reconstruct_tree(); //read from tree.txt (the output of store_tree() ) to rebuild the tree.
-    void decompress(); //translate the characters from bits file back to the original sentence
+    void store_bits(string const& bitsFile); //convert bytes to bits and export
+    void store_tree(string const& treeFile); //store the Node tree in the file for later decompress
+    void reconstruct_tree(string const& treeFile); //read from tree.txt (the output of store_tree() ) to rebuild the tree.
+    void decompress(string const& bitsFile); //translate the characters from bits file back to the original sentence
     string convert(string); //convert 01 code to letter based on the reconstructed tree
 };
 

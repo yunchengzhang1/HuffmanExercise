@@ -3,16 +3,15 @@
 //
 
 #include "Runner.h"
-void Runner::run(string const& filename){
-    readBinaryFile(filename);
-//    print_vec(&nodes);
+void Runner::run(string const& inputFile, string const& treeFile, string const& bitsFile){
+    readBinaryFile(inputFile);
     tree_building();
     traverse_tree(nodes_tree[0], init_bits);
     std::cout << "tree traverse done" << std::endl;
-    store_bits();
-    store_tree();
-    reconstruct_tree();
-    decompress();
+    store_bits(bitsFile);
+    store_tree(treeFile);
+    reconstruct_tree(treeFile);
+    decompress(bitsFile);
 }
 
 void Runner::readBinaryFile(string const& filename){
@@ -91,10 +90,11 @@ void Runner::traverse_tree(Node n,string bitset){
     return;
 }
 
-void Runner::store_bits(){
+void Runner::store_bits(string const& bitsFile){
     std::ofstream ofile;
-    string filename = "bits.txt";
-    ofile.open(filename);
+    if (bitsFile =="")
+        ofile.open( "bits.txt");
+    else {ofile.open(bitsFile);}
     for (int i=0; i<bytes.size(); i++){
         string bitlist = bits.find(bytes[i])->second;
         ofile<<bitlist<<std::endl;
@@ -102,10 +102,11 @@ void Runner::store_bits(){
     std::cout<<"bits file stored"<<std::endl;
 }
 
-void Runner::store_tree(){
+void Runner::store_tree(string const& treeFile){
     std::ofstream ofile;
-    string filename = "tree.txt";
-    ofile.open(filename);
+    if (treeFile =="")
+        ofile.open( "tree.txt");
+    else {ofile.open(treeFile);}
     if (ofile.is_open()){
         for (int i=0; i<full_nodes.size(); i++){
             string bitlist = full_nodes[i].c;
@@ -116,12 +117,13 @@ void Runner::store_tree(){
     }
 }
 
-void Runner::reconstruct_tree() {
+void Runner::reconstruct_tree(string const& treeFile) {
     std::cout << "Trying to reconstruct tree" << std::endl;
     ifstream inFile;
     size_t size = 0; // here
-
-    inFile.open( "tree.txt");
+    if (treeFile =="")
+        inFile.open( "tree.txt");
+    else {inFile.open(treeFile);}
     string line;
     while (std::getline(inFile, line, '\0')){
         if (line.size() == 1){ //if is a leaf: one character EX: a
@@ -150,13 +152,14 @@ void Runner::insert_to_vec(string const& c){
     }
 }
 
-void Runner::decompress(){
+void Runner::decompress(string const& bitsFile){
     std::cout << "Trying to decompress file" << std::endl;
     ifstream inFile;
     size_t size = 0; // here
     string decomp;
-
-    inFile.open( "bits.txt");
+    if (bitsFile =="")
+        inFile.open( "bits.txt");
+    else {inFile.open(bitsFile);}
     string code;
     while (inFile >> code){
         string character =convert(code);

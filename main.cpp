@@ -4,11 +4,8 @@
 
 using std::string;
 
-int main() {
+int main(int argc, char** argv) {
     Runner r;
-    r.run("test.txt");
-
+    r.run(argv[1], argv[2], argv[3]); //argv[1] test.txt, [2] tree.txt, [3] bits.txt
     return 0;
 }
-
-
