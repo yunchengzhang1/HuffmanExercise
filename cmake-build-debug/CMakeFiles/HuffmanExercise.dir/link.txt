@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/HuffmanExercise.dir/main.cpp.o  -o HuffmanExercise 
+/usr/bin/c++  -g   CMakeFiles/HuffmanExercise.dir/main.cpp.o CMakeFiles/HuffmanExercise.dir/Node.cpp.o CMakeFiles/HuffmanExercise.dir/Runner.cpp.o  -o HuffmanExercise 

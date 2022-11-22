@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/HuffmanExercise.dir/Node.cpp.o"
+  "CMakeFiles/HuffmanExercise.dir/Runner.cpp.o"
   "CMakeFiles/HuffmanExercise.dir/main.cpp.o"
   "HuffmanExercise"
   "HuffmanExercise.pdb"

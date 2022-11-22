@@ -123,6 +123,60 @@ HuffmanExercise/fast:
 	$(MAKE) -f CMakeFiles/HuffmanExercise.dir/build.make CMakeFiles/HuffmanExercise.dir/build
 .PHONY : HuffmanExercise/fast
 
+Node.o: Node.cpp.o
+
+.PHONY : Node.o
+
+# target to build an object file
+Node.cpp.o:
+	$(MAKE) -f CMakeFiles/HuffmanExercise.dir/build.make CMakeFiles/HuffmanExercise.dir/Node.cpp.o
+.PHONY : Node.cpp.o
+
+Node.i: Node.cpp.i
+
+.PHONY : Node.i
+
+# target to preprocess a source file
+Node.cpp.i:
+	$(MAKE) -f CMakeFiles/HuffmanExercise.dir/build.make CMakeFiles/HuffmanExercise.dir/Node.cpp.i
+.PHONY : Node.cpp.i
+
+Node.s: Node.cpp.s
+
+.PHONY : Node.s
+
+# target to generate assembly for a file
+Node.cpp.s:
+	$(MAKE) -f CMakeFiles/HuffmanExercise.dir/build.make CMakeFiles/HuffmanExercise.dir/Node.cpp.s
+.PHONY : Node.cpp.s
+
+Runner.o: Runner.cpp.o
+
+.PHONY : Runner.o
+
+# target to build an object file
+Runner.cpp.o:
+	$(MAKE) -f CMakeFiles/HuffmanExercise.dir/build.make CMakeFiles/HuffmanExercise.dir/Runner.cpp.o
+.PHONY : Runner.cpp.o
+
+Runner.i: Runner.cpp.i
+
+.PHONY : Runner.i
+
+# target to preprocess a source file
+Runner.cpp.i:
+	$(MAKE) -f CMakeFiles/HuffmanExercise.dir/build.make CMakeFiles/HuffmanExercise.dir/Runner.cpp.i
+.PHONY : Runner.cpp.i
+
+Runner.s: Runner.cpp.s
+
+.PHONY : Runner.s
+
+# target to generate assembly for a file
+Runner.cpp.s:
+	$(MAKE) -f CMakeFiles/HuffmanExercise.dir/build.make CMakeFiles/HuffmanExercise.dir/Runner.cpp.s
+.PHONY : Runner.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +213,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... HuffmanExercise"
+	@echo "... Node.o"
+	@echo "... Node.i"
+	@echo "... Node.s"
+	@echo "... Runner.o"
+	@echo "... Runner.i"
+	@echo "... Runner.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

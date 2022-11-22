@@ -74,12 +74,12 @@ clean: CMakeFiles/HuffmanExercise.dir/clean
 CMakeFiles/HuffmanExercise.dir/all:
 	$(MAKE) -f CMakeFiles/HuffmanExercise.dir/build.make CMakeFiles/HuffmanExercise.dir/depend
 	$(MAKE) -f CMakeFiles/HuffmanExercise.dir/build.make CMakeFiles/HuffmanExercise.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target HuffmanExercise"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target HuffmanExercise"
 .PHONY : CMakeFiles/HuffmanExercise.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/HuffmanExercise.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/cmake-build-debug/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/HuffmanExercise.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/HuffmanExercise.dir/rule

@@ -82,6 +82,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/Node.cpp">
+			<Option target="HuffmanExercise"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/Node.h">
+			<Option target="HuffmanExercise"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/Runner.cpp">
+			<Option target="HuffmanExercise"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/Runner.h">
+			<Option target="HuffmanExercise"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/AZ/Documents/GitHub/HuffmanExercise/main.cpp">
 			<Option target="HuffmanExercise"/>
 		</Unit>
